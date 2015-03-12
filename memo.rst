@@ -64,23 +64,25 @@ Javascript 忽略空格，制表符以及换行符。
 区分大小写
 ----------
 
-JS 区分大小写。
-
 注释
 ----
 
 支持 ``//`` 和 ``/* */`` 两种风格。
-支持 HTML 格式的注释 ``<!--``，必须对应 ``//-->``
 
-JS 位置
--------
+支持 HTML 格式的注释 ``<!--``：
+
+* 独占一行
+* 以 ``//-->`` 结束，同样独占一行
+
+JS 代码位置
+-----------
 
 推荐位置：
 
 * ``<head> ... </head>``
 * ``<body> ... </body>``
 * both
-* 额外的文件，再加载到 ``<head> ... </head>``
+* 外部文件，通过指令加载到 ``<head> ... </head>``
 
 数据类型
 --------
@@ -120,7 +122,7 @@ JS 的变量必须先声明，再使用，有点类似于 C/C++， Java 等。
 ``+, -, * , /, %, ++, --, ==, !=, >, <, >=, <=, &&, ||, !, &, |, ^,	~, <<, >>, >>>,
 =, +=, -=, *=, /=, %=, ?:, typeof``
 
-.. note:: >>> 逻辑右移， typeof 值为 "number", "string", "boolean"
+.. note:: >>> 逻辑右移， typeof 值为 **{"number", "string", "boolean"}** 之一
 
 if, switch ,for, while
 ----------------------
@@ -157,4 +159,106 @@ break, continue
             statements 
         } 
     //--> 
+    </script>
+
+函数调用
+--------
+
+函数调用语句和 C 语言一样，通过函数名和实参列表实现。
+
+.. note:: 函数定义和函数调用的位置顺序可以任意，不像 C，必须在调用前面预先声明 / 定义。
+
+异常处理
+--------
+
+.. code-block:: html
+
+    <script type="text/javascript">
+    <!--
+        try
+        {
+            statementsToTry
+        }
+        catch ( e ) 
+        {
+            catchStatements
+        }
+        finally
+        {
+            finallyStatements
+        }
+    //-->
+    </script>
+
+警告对话框
+----------
+
+``alert("<warning message>")``
+
+确认对话框
+----------
+
+``value = confirm("<option message>")``
+
+生成确认对话框，带有两个按钮 **OK** 和 **Cancel**
+
+value(Boolean):
+
+* true
+* false
+  
+文本输入框
+----------
+
+``var input = prompt("<title message>", "<default input string>")``
+
+生成一个文本输入框，有标题栏，有默认输入，以及 **OK** 和 **Cancel** 按钮。
+返回输入的字符串或者 null 对象。
+
+网页重定向
+----------
+
+在 ``<head>`` 标签中加上：
+
+``window.location="<url>"``
+
+**void**
+--------
+
+* 放在操作数前面，表示任意类型
+* 放在表达式前面表示没有返回值
+  
+.. code-block:: html
+
+    void func()
+    javascript:void func()
+    void (func())
+    javascript:void(func())
+
+以上写法等价。
+
+**window.print()**
+------------------
+
+调出打印窗口
+
+存储 Cookies
+------------
+
+``document.cookie = "key1=value1;key2=value2;expires=date";
+
+读取 Cookies
+------------
+
+.. code-block:: html
+
+    <script type="text/javascript"> 
+    <!--
+    // window.location = "http://www.baidu.com"
+    window.cookie = "name=huwz;addr=beijing;";
+    document.write(window.cookie);
     </script> 
+
+语法错误或者运行异常
+--------------------
+
